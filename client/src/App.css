@@ -1,1 +1,7 @@
 /* write your css here */
+.hero{
+    background-image: url(./assets/images/hero.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}

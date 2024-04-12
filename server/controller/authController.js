@@ -13,8 +13,16 @@ export const signup = async (req, res) => {
 
     if (user) return res.status(400).json({ error: "User already in use" });
 
-    const profilePic =
-      "https://avatar.iran.liara.run/username?username=Scott+Wilson";
+    const name = fullName.split("");
+    let profilePic;
+    if (name[1])
+      profilePic =
+        "https://avatar.iran.liara.run/username?username=" +
+        name[0] +
+        "+" +
+        name[1];
+    else
+      profilePic = "https://avatar.iran.liara.run/username?username=" + name[0];
 
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(password, salt);
@@ -54,7 +62,7 @@ export const login = async (req, res) => {
       const isPassword = await bcrypt.compare(password, user.password);
 
       if (!isPassword) {
-        return res.status(400).json({ error: "User not registered!" });
+        return res.status(400).json({ error: "Wrong Password" });
       } else {
         generateTokenAndSetCookie(user._id, res);
         res.status(201).json({
@@ -76,7 +84,7 @@ export const login = async (req, res) => {
 export const logout = async (req, res) => {
   try {
     res.clearCookie("jwt");
-    res.status(200).json({message:"User logout successfully!"})
+    res.status(200).json({ message: "User logout successfully!" });
   } catch (error) {
     console.log("Error in signup", error);
     res.status(500).json({ error: "authController- internal server error" });

@@ -35,3 +35,7 @@ export const sendMessaage = async (req, res) => {
     res.status(500).json({ error: "messageController internal server error" });
   }
 };
+
+export const getMessages=async(req,res)=>{
+
+}
