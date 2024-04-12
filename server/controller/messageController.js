@@ -37,5 +37,18 @@ export const sendMessaage = async (req, res) => {
 };
 
 export const getMessages=async(req,res)=>{
+  const recieverID = req.params.id;
+  const senderID = req.user._id;
+
+  try {
+    const conversation = await Conversation.findOne({
+      participants: { $all: [senderID, recieverID] },
+    }).populate('messages');
+    res.status(200).json(conversation);
+  } catch (error) {
+    console.log("Error in getting converstions", error);
+    res.status(500).json({ error: "message fetching internal server error" });
+  }
+
 
 }

@@ -4,6 +4,7 @@ import { useAuthContext } from "../context/AuthContext";
 
 const useUsers = () => {
   const [loading, setLoading] = useState(false);
+  const [selected, setSelected] = useState("");
   const [userNames, setUserNames] = useState([]);
 
   useEffect(() => {
@@ -23,7 +24,7 @@ const useUsers = () => {
     getUsers();
   }, []);
 
-  return { userNames, loading };
+  return { userNames, loading, selected ,setSelected };
 };
 
 export default useUsers;
