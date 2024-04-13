@@ -10,7 +10,7 @@ function App() {
   const {authUser}=useAuthContext();
 
   return (
-    <div className="hero flex justify-center items-center h-screen">
+    <div className="hero flex justify-center items-center h-[98vh]">
       <Routes>
         <Route path="/" element={authUser ? <Home />:<Navigate to="/login"/>} />
         <Route path="/login" element={authUser ? <Navigate to="/"/>:<Login />} />
