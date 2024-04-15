@@ -15,7 +15,7 @@ useEffect(()=>{
     const getConversation = async () => {
         setLoading(true);
         try {
-          const res = await fetch(`/api/messages/get/${selectedChat.id}`);
+          const res = await fetch(`https://chat-app-jmad.onrender.com/api/messages/get/${selectedChat.id}`);
           const data = await res.json();
           if(data===null || data===undefined) {
             setConversation([]);
