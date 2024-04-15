@@ -5,15 +5,21 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { AuthContextProvider } from "./context/AuthContext";
 import { MessagesContextProvider } from "./context/MessagesContext";
+import { SocketContextProvider } from "./context/SocketContext";
+import { ConversationContextProvider } from "./context/ConversationContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthContextProvider>
-        <MessagesContextProvider>
-          <App />
-        </MessagesContextProvider>
+        <SocketContextProvider>
+          <ConversationContextProvider>
+            <MessagesContextProvider>
+              <App />
+            </MessagesContextProvider>
+          </ConversationContextProvider>
+        </SocketContextProvider>
       </AuthContextProvider>
     </BrowserRouter>
   </React.StrictMode>

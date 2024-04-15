@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import useUsers from "./useUsers";
 import { useMessagesContext } from "../context/MessagesContext";
+import { useConversationContext } from "../context/ConversationContext";
 
 const useChats = () => {
   const [loading, setLoading] = useState(false);
-  const [conversation, setConversation] = useState([]);
+  // const [conversation, setConversation] = useState([]);
+  const {conversation,setConversation}=useConversationContext()
   const {selectedChat}=useMessagesContext();
 //   const { selected } = useUsers();
 
@@ -15,7 +17,7 @@ useEffect(()=>{
         try {
           const res = await fetch(`/api/messages/get/${selectedChat.id}`);
           const data = await res.json();
-          if(data===null) {
+          if(data===null || data===undefined) {
             setConversation([]);
             return;
           }
@@ -32,7 +34,7 @@ useEffect(()=>{
     //   console.log(selectedChat,"runned",conversation);
 },[selectedChat])
 
-  return { loading, conversation};
+  return { loading };
 };
 
 export default useChats;

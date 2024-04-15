@@ -8,7 +8,6 @@ const Message = ({ data }) => {
   const [position, setPosition] = useState();
 
   useEffect(() => {
-    console.log(data.senderID,"   ",authUser._id);
     if (data.senderID === authUser._id) setPosition("sender");
     else setPosition("reciever");
   }, []);
@@ -23,7 +22,7 @@ const Message = ({ data }) => {
           />
         </div>
       </div>
-      <div className="chat-bubble bg-[#1F2A44] text-white shadow-2xl">
+      <div className={`chat-bubble ${position==="sender"?"bg-[#1F2A44]":"bg-[#35516C]"}  text-white shadow-md shadow-slate-400`}>
         {data.message}
       </div>
     </div>

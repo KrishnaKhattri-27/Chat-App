@@ -8,7 +8,7 @@ const ChatSection = () => {
   const {selectedChat} = useMessagesContext();
 
   return (
-    <div className="w-[60%] h-full flex flex-col justify-between">
+    <div className="flex w-full md:w-[60%] h-full flex-col justify-between">
       {selectedChat.id===undefined || selectedChat.id===null || selectedChat.id==="" ? <ChatBanner /> : <SelectedChat />}
     </div>
   );

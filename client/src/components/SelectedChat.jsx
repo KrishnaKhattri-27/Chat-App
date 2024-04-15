@@ -3,10 +3,13 @@ import Chat from "./Chat";
 import { FaPaperPlane } from "react-icons/fa6";
 import { useMessagesContext } from "../context/MessagesContext";
 import useSendMessage from "../hooks/useSendMessage";
+import useListenMessages from "../hooks/useListenMessages";
 
 const SelectedChat = () => {
   const { selectedChat } = useMessagesContext();
   const { loading, Send } = useSendMessage();
+  // const {AddNew} = useListenMessages();
+  // const {checkNew}=useListenMessages()
 
   const [input, setInput] = useState("");
 
@@ -15,10 +18,12 @@ const SelectedChat = () => {
     if (input === "") return;
     await Send(input);
     setInput("");
+    // AddNew();
+    // checkNew();
   };
-
+  
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full flex-col justify-between">
       <div className="flex gap-x-4 items-center w-full  py-2 border-b-2 border-black">
         <img src={selectedChat.picture} alt="" className="w-10 aspect-square" />
         <h1 className="text-lg text-black font-bold">{selectedChat.name}</h1>

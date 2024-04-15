@@ -5,18 +5,34 @@ import Signup from "./pages/Signup";
 import Home from "./pages/Home";
 import { Toaster } from "react-hot-toast";
 import { useAuthContext } from "./context/AuthContext";
+import MobileHome from "./pages/MobileHome";
 
 function App() {
-  const {authUser}=useAuthContext();
+  const { authUser } = useAuthContext();
 
   return (
     <div className="hero flex justify-center items-center h-[98vh]">
       <Routes>
-        <Route path="/" element={authUser ? <Home />:<Navigate to="/login"/>} />
-        <Route path="/login" element={authUser ? <Navigate to="/"/>:<Login />} />
-        <Route path="/signup" element={authUser ? <Navigate to="/"/>:<Signup />} />
+        <Route
+          path="/"
+          element={authUser ? <Home /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/login"
+          element={authUser ? <Navigate to="/" /> : <Login />}
+        />
+        <Route
+          path="/signup"
+          element={authUser ? <Navigate to="/" /> : <Signup />}
+        />
+        {window.innerWidth < 800 ? (
+          <Route
+            path="/:id"
+            element={authUser ? <MobileHome /> : <Navigate to="/login" />}
+          />
+        ) : null}
       </Routes>
-      <Toaster/>
+      <Toaster />
     </div>
   );
 }

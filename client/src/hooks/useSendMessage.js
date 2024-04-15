@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useMessagesContext } from "../context/MessagesContext";
 import toast from "react-hot-toast";
+import { useConversationContext } from "../context/ConversationContext";
 
 const useSendMessage = () => {
   const [loading, setLoading] = useState(false);
+  const {conversation,setConversation}=useConversationContext();
   const { selectedChat } = useMessagesContext();
 
   const Send = async (input) => {
@@ -16,9 +18,14 @@ const useSendMessage = () => {
         },
         body: JSON.stringify({message:input}),
       });
-      const data=res.json();
+      const data=await res.json();
       if(data.error)
       throw new Error(data.error);
+
+      setConversation({
+        ...conversation,
+        messages: [...conversation.messages, data]
+    });
 
     } catch (error) {
         toast.error(error.message);

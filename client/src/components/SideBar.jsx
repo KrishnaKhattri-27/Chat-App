@@ -4,7 +4,7 @@ import Logout from "./Logout";
 
 const SideBar = () => {
   return (
-    <div className="w-[40%] h-full border-r-2 pt-5">
+    <div className="md:w-[40%] w-full h-full border-r-2 pt-5">
       <div className="flex mx-5 items-center gap-x-2">
         <Logout />
         <label className="input w-full input-bordered flex items-center gap-2">

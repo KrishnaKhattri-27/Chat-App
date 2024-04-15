@@ -3,7 +3,7 @@ import User from "../models/userModel.js";
 const userController = async (req, res) => {
   try {
     const currentUser = req.user._id;
-    const allUsers = await User.find().select("-password");
+    const allUsers = await User.find({_id:{$ne:currentUser}}).select("-password");
 
     res.status(200).json(allUsers);
   } catch (error) {
