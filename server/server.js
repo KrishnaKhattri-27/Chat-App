@@ -15,7 +15,7 @@ dotenv.config();
 
 const PORT = process.env.PORT || 5000;
 
-app.use(cors());
+app.use(cors({credentials: true, origin: true,exposedHeaders: ["set-cookie"]}));
 
 app.use(express.json());
 app.use(cookieParser());
