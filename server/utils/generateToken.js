@@ -7,6 +7,7 @@ const generateTokenAndSetCookie=(userID,res)=>{
 
     res.cookie("jwt",token,{
         maxAge:15*24*60*60*1000,
+        domain:"https://chat-app-lyart-rho.vercel.app",
         httpOnly:false,
         sameSite:"none",
         secure:true
