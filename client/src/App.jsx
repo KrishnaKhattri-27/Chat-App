@@ -9,7 +9,7 @@ import MobileHome from "./pages/MobileHome";
 
 function App() {
   const { authUser } = useAuthContext();
-
+console.log("home",authUser);
   return (
     <div className="hero flex justify-center items-center h-[98vh]">
       <Routes>

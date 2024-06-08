@@ -5,12 +5,14 @@ const generateTokenAndSetCookie=(userID,res)=>{
         expiresIn:'15d'
     })   
 
+    // console.log("autfile",token);
+
     res.cookie("jwt",token,{
         maxAge:15*24*60*60*1000,
-        domain:"https://chat-app-lyart-rho.vercel.app",
-        httpOnly:false,
-        sameSite:"none",
-        secure:true
+        // domain:"http://localhost:3000",
+        httpOnly: true,
+        sameSite: "strict",
+        secure: false // Set to true only if using HTTPS locally
     })
 }
 
