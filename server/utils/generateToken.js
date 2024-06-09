@@ -11,7 +11,7 @@ const generateTokenAndSetCookie=(userID,res)=>{
         maxAge:15*24*60*60*1000,
         // domain:"http://localhost:3000",
         httpOnly: true,
-        sameSite: "none",
+        // sameSite: "none",
         secure: true // Set to true only if using HTTPS locally
     })
 }
