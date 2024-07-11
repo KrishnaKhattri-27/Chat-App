@@ -12,12 +12,21 @@ const useUsers = () => {
     const getUsers = async () => {
       setLoading(true);
       try {
-        const res = await fetch("/api/users",{
+// <<<<<<< main
+//         const res = await fetch("/api/users",{
+//           headers: {
+//             // "Content-Type": "application/json",
+//               "Authorization":"Bearer "+authUser.token
+//           },
+//         });
+// =======
+        const res = await fetch("https://chat-app-hkvs.onrender.com/api/users" ,{
           headers: {
             // "Content-Type": "application/json",
               "Authorization":"Bearer "+authUser.token
           },
         });
+// >>>>>>> production
         const data = await res.json();
         if (data.error) throw new Error(data.error);
         setUserNames(data);

@@ -13,7 +13,7 @@ const useSendMessage = () => {
   const Send = async (input) => {
     setLoading(true);
     try {
-      const res = await fetch(`/api/messages/send/${selectedChat.id}`, {
+      const res = await fetch(`https://chat-app-hkvs.onrender.com/api/messages/send/${selectedChat.id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

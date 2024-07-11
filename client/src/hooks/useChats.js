@@ -17,11 +17,19 @@ useEffect(()=>{
     const getConversation = async () => {
         setLoading(true);
         try {
-          const res = await fetch(`/api/messages/get/${selectedChat.id}`,{
+// <<<<<<< main
+//           const res = await fetch(`/api/messages/get/${selectedChat.id}`,{
+//             headers:{
+//               "Authorization":"Bearer "+authUser.token
+//             }
+//           });
+// =======
+          const res = await fetch(`https://chat-app-hkvs.onrender.com/api/messages/get/${selectedChat.id}`,{
             headers:{
               "Authorization":"Bearer "+authUser.token
             }
           });
+// >>>>>>> production
           const data = await res.json();
           if(data===null || data===undefined) {
             setConversation([]);
