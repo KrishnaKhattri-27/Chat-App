@@ -3,8 +3,10 @@ import toast from "react-hot-toast";
 import useUsers from "./useUsers";
 import { useMessagesContext } from "../context/MessagesContext";
 import { useConversationContext } from "../context/ConversationContext";
+import { useAuthContext } from "../context/AuthContext";
 
 const useChats = () => {
+  const {authUser}=useAuthContext()
   const [loading, setLoading] = useState(false);
   // const [conversation, setConversation] = useState([]);
   const {conversation,setConversation}=useConversationContext()
@@ -15,7 +17,11 @@ useEffect(()=>{
     const getConversation = async () => {
         setLoading(true);
         try {
-          const res = await fetch(`/api/messages/get/${selectedChat.id}`);
+          const res = await fetch(`/api/messages/get/${selectedChat.id}`,{
+            headers:{
+              "Authorization":"Bearer "+authUser.token
+            }
+          });
           const data = await res.json();
           if(data===null || data===undefined) {
             setConversation([]);

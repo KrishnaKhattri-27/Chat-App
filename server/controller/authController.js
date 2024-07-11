@@ -1,6 +1,11 @@
 import User from "../models/userModel.js";
 import bcrypt from "bcryptjs";
 import generateTokenAndSetCookie from "../utils/generateToken.js";
+import jwt from "jsonwebtoken"
+
+const createToken=(id)=>{
+  return jwt.sign({id},process.env.SECRET_KEY,{expiresIn:'3d'})
+}
 
 export const signup = async (req, res) => {
   try {
@@ -36,13 +41,15 @@ export const signup = async (req, res) => {
     });
 
     if (newUser) {
-      generateTokenAndSetCookie(newUser._id, res);
+      // generateTokenAndSetCookie(newUser._id, res);
+      const token=createToken(newUser._id);
       await newUser.save();
       res.status(201).json({
         _id: newUser._id,
         fullName: newUser.fullName,
         username: newUser.username,
         picture: newUser.picture,
+        token:token
       });
     } else {
       return res.status(400).json({ error: "invalid user data" });
@@ -64,12 +71,14 @@ export const login = async (req, res) => {
       if (!isPassword) {
         return res.status(400).json({ error: "Wrong Password" });
       } else {
-        generateTokenAndSetCookie(user._id, res);
+       const token= createToken(user._id);
+        // generateTokenAndSetCookie(user._id, res);
         res.status(201).json({
           _id: user._id,
           fullName: user.fullName,
           username: user.username,
           picture: user.picture,
+          token:token
         });
       }
     } else {
@@ -83,7 +92,7 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
   try {
-    res.clearCookie("jwt");
+    // res.clearCookie("jwt");
     res.status(200).json({ message: "User logout successfully!" });
   } catch (error) {
     console.log("Error in signup", error);

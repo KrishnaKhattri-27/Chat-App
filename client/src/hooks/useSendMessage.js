@@ -2,8 +2,10 @@ import { useState } from "react";
 import { useMessagesContext } from "../context/MessagesContext";
 import toast from "react-hot-toast";
 import { useConversationContext } from "../context/ConversationContext";
+import { useAuthContext } from "../context/AuthContext";
 
 const useSendMessage = () => {
+  const {authUser}=useAuthContext();
   const [loading, setLoading] = useState(false);
   const {conversation,setConversation}=useConversationContext();
   const { selectedChat } = useMessagesContext();
@@ -15,6 +17,7 @@ const useSendMessage = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization":"Bearer "+authUser.token
         },
         body: JSON.stringify({message:input}),
       });
